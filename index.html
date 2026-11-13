@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bizz Tracker helps small businesses manage inventory, track sales and monitor profits."
+    />
+    <meta name="theme-color" content="#172554" />
+
+    <title>Bizz Tracker | Business Management</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Lucide icons and application JavaScript -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Main application layout -->
+    <div class="app-layout">
+      <!-- Sidebar navigation -->
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>Bizz<span>Tracker.</span></h1>
+          <p>Business Management</p>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <p class="nav-label">WORKSPACE</p>
+
+          <a href="#dashboard" class="nav-link active">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+            
+          </a>
+
+          <a href="#inventory" class="nav-link">
+            <i data-lucide="package"></i>
+            <span>Inventory</span>
+          </a>
+
+          <a href="#sales" class="nav-link">
+            <i data-lucide="shopping-cart"></i>
+            <span>Sales</span>
+          </a>
+
+          <a href="#expenses" class="nav-link">
+            <i data-lucide="wallet"></i>
+            <span>Expenses</span>
+          </a>
+
+          <p class="nav-label">MANAGEMENT</p>
+
+          <a href="#reports" class="nav-link">
+            <i data-lucide="chart-column"></i>
+            <span>Reports</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-avatar">B</div>
+          <div>
+            <strong>My Business</strong>
+            <p>Business Owner</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main page content -->
+      <main class="main-content">
+        <!-- Top navigation bar -->
+        <header class="topbar">
+          <div>
+            <p class="breadcrumb">Workspace / Dashboard</p>
+            <h2>Business Overview</h2>
+          </div>
+
+          <div class="topbar-right">
+            <span class="date-display" id="today"></span>
+          </div>
+        </header>
+
+        <div class="container" id="dashboard">
+          <!-- Welcome section and quick actions -->
+          <section class="welcome">
+            <div>
+              <h2>Welcome back!</h2>
+              <p>Here's what's happening with your business today.</p>
+            </div>
+
+            <div class="welcome-actions">
+              <a href="#productForm" class="btn btn-secondary">
+                <i data-lucide="plus"></i>
+                Add Product
+              </a>
+
+              <a href="#saleForm" class="btn btn-primary">
+                <i data-lucide="shopping-bag"></i>
+                Record Sale
+              </a>
+            </div>
+          </section>
+
+          <!-- Business statistics -->
+          <section class="stats" aria-label="Business statistics">
+            <article class="card stat-card">
+              <div class="stat-header">
+                <p>Today's Revenue</p>
+                <span class="stat-icon revenue-icon">
+                  <i data-lucide="banknote"></i>
+                </span>
+              </div>
+              <h2 id="revenue">KES 0</h2>
+              <p class="stat-description">Total sales income today</p>
+            </article>
+
+            <article class="card stat-card">
+              <div class="stat-header">
+                <p>Gross Profit / Loss</p>
+                <span class="stat-icon profit-icon">
+                  <i data-lucide="trending-up"></i>
+                </span>
+              </div>
+              <h2 id="profit">KES 0</h2>
+              <p class="stat-description">Today's trading profit</p>
+            </article>
+
+            <article class="card stat-card">
+              <div class="stat-header">
+                <p>Products in Stock</p>
+                <span class="stat-icon stock-icon">
+                  <i data-lucide="package"></i>
+                </span>
+              </div>
+              <h2 id="stock">0</h2>
+              <p class="stat-description">Total available units</p>
+            </article>
+
+            <article class="card stat-card">
+              <div class="stat-header">
+                <p>Today's Transactions</p>
+                <span class="stat-icon transaction-icon">
+                  <i data-lucide="receipt"></i>
+                </span>
+              </div>
+              <h2 id="transactions">0</h2>
+              <p class="stat-description">Recorded sales today</p>
+            </article>
+          </section>
+
+          <!-- Product and sales forms -->
+          <section class="layout" aria-label="Business actions">
+            <!-- Add product form -->
+            <article class="panel" id="add-product">
+              <div class="panel-header">
+                <div>
+                  <h3>Add New Product</h3>
+                  <p>Add an item to your business inventory.</p>
+                </div>
+                <i data-lucide="package-plus"></i>
+              </div>
+
+              <form id="productForm">
+                <div class="form-group">
+                  <label for="productName">Product Name</label>
+                  <input
+                    id="productName"
+                    name="productName"
+                    type="text"
+                    placeholder="e.g. Coca-Cola 500ml"
+                    required
+                  />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="costPrice">Buying Price (KES)</label>
+                    <input
+                      id="costPrice"
+                      name="costPrice"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      placeholder="0.00"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sellingPrice">Selling Price (KES)</label>
+                    <input
+                      id="sellingPrice"
+                      name="sellingPrice"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      placeholder="0.00"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="quantity">Initial Quantity</label>
+                    <input
+                      id="quantity"
+                      name="quantity"
+                      type="number"
+                      min="0"
+                      step="1"
+                      placeholder="0"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="minStock">Low Stock Alert</label>
+                    <input
+                      id="minStock"
+                      name="minStock"
+                      type="number"
+                      min="0"
+                      step="1"
+                      value="5"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">
+                  <i data-lucide="plus-circle"></i>
+                  Add Product
+                </button>
+              </form>
+            </article>
+
+            <!-- Record sale form -->
+            <article class="panel" id="record-sale">
+              <div class="panel-header">
+                <div>
+                  <h3>Record a Sale</h3>
+                  <p>Record products purchased by your customers.</p>
+                </div>
+                <i data-lucide="shopping-cart"></i>
+              </div>
+
+              <form id="saleForm">
+                <div class="form-group">
+                  <label for="saleProduct">Select Product</label>
+                  <select id="saleProduct" name="saleProduct" required>
+                    <option value="">Select a product</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="saleQuantity">Quantity Sold</label>
+                  <input
+                    id="saleQuantity"
+                    name="saleQuantity"
+                    type="number"
+                    min="1"
+                    step="1"
+                    placeholder="Enter quantity sold"
+                    required
+                  />
+                </div>
+
+                <div class="sale-information">
+                  <i data-lucide="info"></i>
+                  <p>
+                    The system automatically calculates revenue and gross profit
+                    using the registered product prices.
+                  </p>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">
+                  <i data-lucide="check-circle"></i>
+                  Record Sale
+                </button>
+              </form>
+            </article>
+          </section>
+
+          <!-- Inventory management -->
+          <section class="panel section" id="inventory">
+            <div class="section-heading">
+              <div>
+                <h3>Inventory Management</h3>
+                <p>Monitor your products and available stock.</p>
+              </div>
+
+              <span class="stock-alert" id="lowCount"> 0 low-stock items </span>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Buying Price</th>
+                    <th>Selling Price</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="inventoryTable">
+                  <tr>
+                    <td colspan="6" class="empty-state">
+                      No products added yet.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Sales history -->
+          <section class="panel section" id="sales">
+            <div class="section-heading">
+              <div>
+                <h3>Today's Sales</h3>
+                <p>View all transactions recorded today.</p>
+              </div>
+
+              <span id="salesDate"></span>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Revenue</th>
+                    <th>Profit / Loss</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+
+                <tbody id="salesTable">
+                  <tr>
+                    <td colspan="5" class="empty-state">
+                      No sales recorded today.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Expense management -->
+          <section class="panel section" id="expenses">
+            <div class="section-heading">
+              <div>
+                <h3>Expense Management</h3>
+                <p>Record and monitor your business operating expenses.</p>
+              </div>
+
+              <span class="stock-alert" id="expenseCount">0 expenses</span>
+            </div>
+
+            <!-- Expense summaries -->
+            <div class="expense-summary">
+              <div class="expense-summary-card">
+                <span>Total Expenses Today</span>
+                <strong id="todayExpenses">KES 0.00</strong>
+              </div>
+
+              <div class="expense-summary-card">
+                <span>Total Expenses This Month</span>
+                <strong id="monthExpenses">KES 0.00</strong>
+              </div>
+            </div>
+
+            <!-- New expense form -->
+            <div class="expense-form-panel">
+              <h4>Record New Expense</h4>
+
+              <form id="expenseForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="expenseTitle">Expense Description</label>
+                    <input
+                      type="text"
+                      id="expenseTitle"
+                      placeholder="e.g. Monthly shop rent"
+                      maxlength="100"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="expenseAmount">Amount (KES)</label>
+                    <input
+                      type="number"
+                      id="expenseAmount"
+                      min="0.01"
+                      step="0.01"
+                      placeholder="0.00"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <select id="expenseCategory" required>
+                      <option value="">Select category</option>
+                      <option value="Rent">Rent</option>
+                      <option value="Electricity">Electricity</option>
+                      <option value="Water">Water</option>
+                      <option value="Transport">Transport</option>
+                      <option value="Salaries">Salaries</option>
+                      <option value="Internet">Internet</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Maintenance">Maintenance</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="expensePayment">Payment Method</label>
+                    <select id="expensePayment" required>
+                      <option value="">Select payment method</option>
+                      <option value="Cash">Cash</option>
+                      <option value="M-Pesa">M-Pesa</option>
+                      <option value="Bank">Bank</option>
+                      <option value="Card">Card</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="expenseDate">Expense Date</label>
+                  <input type="date" id="expenseDate" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="plus-circle"></i>
+                  Record Expense
+                </button>
+              </form>
+            </div>
+
+            <!-- Expense history -->
+            <div class="section-heading expense-history-heading">
+              <div>
+                <h3>Expense History</h3>
+                <p>Review expenses recorded by your business.</p>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="expensesTable">
+                  <tr>
+                    <td colspan="6" class="empty">No expenses recorded yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Business reports -->
+          <section class="panel section" id="reports">
+            <div class="section-heading">
+              <div>
+                <h3>Business Reports</h3>
+                <p>
+                  Understand your business performance over a selected period.
+                </p>
+              </div>
+
+              <button id="exportReport" class="btn btn-primary">
+                <i data-lucide="printer"></i>
+                Print Report
+              </button>
+            </div>
+
+            <!-- Report date filters -->
+            <div class="report-filters">
+              <div class="form-group">
+                <label for="reportStart">Start Date</label>
+                <input type="date" id="reportStart" />
+              </div>
+
+              <div class="form-group">
+                <label for="reportEnd">End Date</label>
+                <input type="date" id="reportEnd" />
+              </div>
+            </div>
+
+            <!-- Financial summary -->
+            <div class="report-summary">
+              <article class="report-card">
+                <span>Revenue</span>
+                <h3 id="reportRevenue">KES 0.00</h3>
+              </article>
+
+              <article class="report-card">
+                <span>Cost of Goods Sold</span>
+                <h3 id="reportCOGS">KES 0.00</h3>
+              </article>
+
+              <article class="report-card">
+                <span>Gross Profit</span>
+                <h3 id="reportGrossProfit">KES 0.00</h3>
+              </article>
+
+              <article class="report-card">
+                <span>Operating Expenses</span>
+                <h3 id="reportExpenses">KES 0.00</h3>
+              </article>
+
+              <article class="report-card highlight-report">
+                <span>Net Profit / Loss</span>
+                <h3 id="reportNetProfit">KES 0.00</h3>
+              </article>
+
+              <article class="report-card">
+                <span>Transactions</span>
+                <h3 id="reportTransactions">0</h3>
+              </article>
+            </div>
+
+            <!-- Detailed report information -->
+            <div class="report-details">
+              <div class="report-detail-panel">
+                <h4>Expense Breakdown</h4>
+                <p>See how much your business spends in each category.</p>
+
+                <div id="expenseBreakdown">
+                  <p class="empty">No expenses for this period.</p>
+                </div>
+              </div>
+
+              <div class="report-detail-panel">
+                <h4>Business Performance</h4>
+                <p>Financial overview for the selected period.</p>
+
+                <div class="performance-list">
+                  <div>
+                    <span>Gross Profit Margin</span>
+                    <strong id="reportMargin">0%</strong>
+                  </div>
+
+                  <div>
+                    <span>Average Sale Value</span>
+                    <strong id="reportAverageSale">KES 0.00</strong>
+                  </div>
+
+                  <div>
+                    <span>Expense-to-Revenue Ratio</span>
+                    <strong id="reportExpenseRatio">0%</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="report-note" id="reportPeriod"></p>
+          </section>
+
+          <!-- Application footer -->
+          <footer class="footer">
+            <p>
+              &copy; <span id="currentYear"></span> Bizz Tracker. Business
+              management made simpler.
+            </p>
+          </footer>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
